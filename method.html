@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How we calculate: Impact Tracker</title>
+<link rel="icon" href="img/icon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  .doc table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 15px; }
+  .doc th, .doc td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .doc th { color: var(--faint); font-weight: 500; }
+  .doc td:nth-child(2) { white-space: nowrap; }
+  .doc .table { overflow-x: auto; }
+  .doc .sub { color: var(--faint); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="./"><img src="img/icon.png" alt="">Impact Tracker</a>
+    <div class="links"><a href="./#how">How it works</a><a href="method.html">How we calculate</a><a href="privacy.html">Privacy</a></div>
+  </nav>
+  <main class="doc">
+  <h1>How we calculate this</h1>
+  <p class="sub">Every number in Impact Tracker is an estimate. Published research disagrees a lot, so we use middle-of-the-range figures and explain them here.</p>
+
+  <h2>Browsing</h2>
+  <p>We count the time a site is in front of you: the active tab in a focused window while you're using the computer, or any tab that's playing audio or video. A video call that's playing sound counts even if you've switched to another tab, because the call is usually the bigger footprint. Each category has a rate in grams of CO₂ per minute, which includes your own device's electricity, the network and the data center.</p>
+  <div class="table"><table>
+    <tr><th>Category</th><th>g CO₂/min</th><th>Basis</th></tr>
+    <tr><td>Streaming</td><td>0.9</td><td>About 55 g per hour of video (Carbon Trust, 2021). That was measured on Europe's grid, which is cleaner than the US average, so the US figure is likely higher.</td></tr>
+    <tr><td>Video calls</td><td>0.8</td><td>An HD call sends and receives video at the same time, about 2–3 GB per hour (Zoom's bandwidth guide), on top of the laptop and webcam. Studies that use higher network-energy figures report 150–1,000 g per hour (Obringer et al., 2021), so this is on the cautious side. Turning your camera off cuts most of a call's data. Zoom, Google Meet, Teams, Webex, Whereby, Jitsi and FaceTime on the web.</td></tr>
+    <tr><td>Social</td><td>1.0</td><td>0.6 to 2.6 g/min across major apps (Greenspector, 2021)</td></tr>
+    <tr><td>Shopping</td><td>0.4</td><td>General browsing plus image-heavy pages</td></tr>
+    <tr><td>Search, AI sites, other</td><td>0.3</td><td>A ~40 W laptop on the average US grid, plus network</td></tr>
+  </table></div>
+
+  <h2>AI</h2>
+  <p>With AI, almost all the energy is used in the data center while a reply is being generated. Reading the reply afterwards costs very little. So instead of timing your visit, Impact Tracker counts prompts and estimates how long each reply is, at about 4 characters per token.</p>
+  <div class="table"><table>
+    <tr><th>What</th><th>Energy</th><th>Basis</th></tr>
+    <tr><td>Typical text reply (~500 tokens)</td><td>~0.3 Wh</td><td>Epoch AI (2025). Google reports 0.24 Wh for a median Gemini prompt, OpenAI 0.34 Wh for an average ChatGPT query.</td></tr>
+    <tr><td>Long conversations</td><td>+0.05 Wh per 1,000 tokens</td><td>The model rereads the whole conversation on every turn. Caching reduces that cost, and the rate assumes it does.</td></tr>
+    <tr><td>One AI image</td><td>~2.9 Wh</td><td>Luccioni et al., "Power Hungry Processing" (2023). Midjourney, Ideogram and Leonardo usually make 4 images per prompt.</td></tr>
+    <tr><td>One AI video (~5 s)</td><td>~950 Wh</td><td>About 3.4 MJ per clip (MIT Technology Review with Hugging Face, 2025)</td></tr>
+  </table></div>
+  <p>Energy is then converted to:</p>
+  <ul>
+    <li><strong>CO₂:</strong> 0.37 g per Wh, the US grid average (EPA eGRID). Providers that count the clean energy they buy report lower figures. Google's is 0.03 g per prompt.</li>
+    <li><strong>Water:</strong> 4.2 mL per Wh. About 1.1 mL is used to cool the data center, which matches Google's 0.26 mL per prompt. Another ~3.1 mL is used by power plants to generate the electricity (Li et al., "Making AI Less Thirsty", 2023). Some providers report only the cooling water, so their numbers are lower.</li>
+  </ul>
+
+  <h2>Products</h2>
+  <p>When you open Impact Tracker on an Amazon.com product page, it reads that page's price and category. If you turn on <strong>Amazon ratings</strong>, it does the same on every Amazon.com product page and shows the result in a small pill in the corner. Either way, the estimate is worked out on your computer and nothing is sent anywhere. The estimate is the price times an emission factor for that kind of product: the average greenhouse gases released per dollar spent, from making the product through getting it to the store (<a href="https://zenodo.org/records/17202747">EPA Supply Chain Greenhouse Gas Emission Factors v1.4.0</a>, Ingwersen and Young, 2025, "with margins", using the IPCC's latest AR6 warming values).</p>
+  <p>The factors are in 2024 dollars, so prices are first converted with the Consumer Price Index (CPI-U: 313.7 for 2024, 336.9 in September 2026).</p>
+  <div class="table"><table>
+    <tr><th>Examples</th><th>kg CO₂e per $</th><th>EPA category (NAICS)</th></tr>
+    <tr><td>Clothing</td><td>0.10</td><td>Cut and sew apparel (315240)</td></tr>
+    <tr><td>Shoes</td><td>0.25</td><td>Footwear (316210)</td></tr>
+    <tr><td>Phones</td><td>0.11</td><td>Wireless communications equipment (334220)</td></tr>
+    <tr><td>Laptops and tablets</td><td>0.06</td><td>Electronic computers (334111)</td></tr>
+    <tr><td>Furniture</td><td>0.17</td><td>Wood household furniture (337122)</td></tr>
+    <tr><td>Toys and games</td><td>0.14</td><td>Dolls, toys and games (339930)</td></tr>
+    <tr><td>Cleaning products</td><td>0.30</td><td>Soap and detergent (325611)</td></tr>
+    <tr><td>Plastic storage</td><td>0.33</td><td>Other plastics products (326199)</td></tr>
+  </table></div>
+  <p>The full list of about 35 categories is in <code>product.js</code>. Confidence is <strong>medium</strong> when we recognize a specific product type, like headphones or towels, and <strong>low</strong> when we only know a general area, like "Electronics". Nothing is rated high yet.</p>
+  <p>Limits of this method:</p>
+  <ul>
+    <li><strong>Same price, same footprint.</strong> A recycled-cotton shirt and a polyester one at the same price get the same estimate. For clothing with a listed fabric, we use the material-based method below instead.</li>
+    <li><strong>Cheap can look better than it is.</strong> A $6 shirt gets a smaller estimate than a $60 one, even if it wears out much sooner. That's why only clothing scored with the method below gets a 0–100 score.</li>
+    <li><strong>Not added to your totals.</strong> Looking at a product isn't buying it.</li>
+  </ul>
+
+  <h2>Clothing</h2>
+  <p>When an Amazon clothing page lists the fabric, Impact Tracker uses <a href="https://ecobalyse.beta.gouv.fr">Ecobalyse</a> instead of the price-based estimate above. Ecobalyse is the French government's open-source method for the environmental cost of textiles. It models each step of making a garment: growing or producing the fiber, spinning, knitting or weaving, dyeing, sewing and transport.</p>
+  <p>We pre-computed Ecobalyse results for 11 garment types and 16 fibers, assuming the garment was made in Asia, where most imported clothing comes from. Washing and drying are left out, so the numbers describe the product itself, not how you use it. Each garment type uses Ecobalyse's typical weight, such as 150 g for a T-shirt or 450 g for jeans, because Amazon's listed weights usually include packaging.</p>
+
+  <p><strong>The 0–100 score</strong> (100 is best) uses Ecobalyse's environmental cost. That's a single number that combines climate, water, land use, pollution, toxicity and microplastics. Each item is compared only with the same type of garment: 100 is the lowest impact possible for that garment (the best fiber, shipped by sea, from a brand with the best durability), and the score is that best impact divided by this item's. A score of 50 means twice the impact of the best possible version. Most ordinary clothing scores between 25 and 70. The score doesn't depend on how often you wear the item.</p>
+  <p><strong>Why a fiber can score well but have high CO₂.</strong> Ecobalyse's score weighs much more than climate. Conventional cotton scores low mainly because of irrigation water and pesticides, and wool because of grazing land and methane. Fibers made from oil, like polyester and acrylic, need little water or land, so they often score well even though they shed microplastics, and acrylic and nylon have higher CO₂ than cotton. "Why this score" shows where the fiber ranks overall and on CO₂ alone, so you can see both.</p>
+  <p>Ecobalyse adjusts the score for <strong>durability</strong>, based on the brand's business model rather than on any one product:</p>
+  <ul>
+    <li><strong>Ultra-fast fashion brands</strong>, which release huge numbers of new styles and offer no repairs, get Ecobalyse's lowest durability (0.67), so their impact counts about 1.5× more. Ecobalyse also assumes these garments are shipped by air.</li>
+    <li><strong>Brands with repair services</strong> (for example Patagonia, Levi's and Arc'teryx) get a durability bonus that depends on price.</li>
+    <li><strong>Every other brand</strong> gets standard durability (1.0), because we don't know enough about it.</li>
+  </ul>
+
+  <p><strong>CO₂</strong> is Ecobalyse's climate figure for making and shipping the garment. A surprising finding: the fiber matters much less than you'd expect. A cotton and a polyester T-shirt both come to about 5–6 kg, because most emissions come from spinning, dyeing and sewing, usually on coal-heavy power grids. The garment's weight and how it's shipped matter more.</p>
+  <p><strong>Water</strong> is shown only for cotton, the fiber with the best data and by far the biggest water use. We count blue water, meaning water taken from rivers and aquifers for irrigation and processing: 1,230 L for a 250 g T-shirt (Chapagain et al., "The water footprint of cotton consumption", UNESCO-IHE, 2006). The often-quoted 2,700 L also counts rainwater and the water needed to dilute pollution. Ecobalyse's own water measure, which weights water by local scarcity, is included in the score.</p>
+  <p>Limits:</p>
+  <ul>
+    <li><strong>Confidence is medium</strong> when the fabric comes from the product details. It's <strong>low</strong> when it comes from the title, when part of the fabric isn't in our data, or when we estimate a garment from a similar one (dresses from skirts, shorts and leggings from lighter pants).</li>
+    <li>Silk, leather, cashmere and some other materials aren't in Ecobalyse yet. Those items fall back to the price-based estimate.</li>
+    <li>We don't yet use where the item was made, certifications, or brand transparency.</li>
+  </ul>
+
+  <h2>Find it used</h2>
+  <p>On Amazon product pages, Impact Tracker links to secondhand stores that suit the product: Poshmark and thredUP for clothing, Back Market and Swappa for phones and electronics, libraries and ThriftBooks for books, SidelineSwap for sports gear, and eBay and Facebook Marketplace for almost everything. If Amazon itself offers the item used, renewed or through Amazon Resale, we show that price too.</p>
+  <p>A used item needs no new manufacturing, which is usually most of a product's footprint. We don't claim exact savings, because buying used doesn't always mean one less new item gets made.</p>
+  <p>The search uses a shortened version of the product name. Nothing is sent to these stores unless you click a link.</p>
+  <p><strong>Your choices this month</strong> counts each product where you clicked a used option, once per product. We only see the click, not whether you bought it, so we say "checked used first", not "saved". "Could save" adds up the difference between Amazon's new and used prices for those products. Other stores' prices aren't included, because seeing them would mean sending your searches somewhere.</p>
+
+  <h2>What's not included</h2>
+  <ul>
+    <li><strong>Training and hardware.</strong> Training a model and manufacturing the chips have big one-time costs, which are shared across every use. Mistral's 2025 life-cycle study, which counts both, put a text reply at about 1.1 g CO₂ and 45 mL of water.</li>
+    <li><strong>AI outside the browser.</strong> Phone apps, coding tools and direct API use can't be seen by a browser extension.</li>
+    <li><strong>Hidden reasoning.</strong> Some models "think" before they answer without showing all of that text. Long reasoning can cost several times more than we estimate.</li>
+  </ul>
+
+  <h2>Comparisons</h2>
+  <ul>
+    <li>Phone charge: ~15 Wh</li>
+    <li>Driving: ~400 g CO₂ per mile in an average car (EPA)</li>
+    <li>Teaspoon: 5 mL. Glass: 250 mL.</li>
+  </ul>
+  </main>
+</div>
+</body>
+</html>

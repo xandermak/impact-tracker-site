@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impact Tracker: check before you buy</title>
+<meta name="description" content="A free Chrome extension that shows the footprint of what you buy on Amazon and finds it cheaper used. Private by design.">
+<link rel="icon" href="img/icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="./"><img src="img/icon.png" alt="">Impact Tracker</a>
+    <div class="links"><a href="#how">How it works</a><a href="method.html">How we calculate</a><a href="privacy.html">Privacy</a></div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <p class="label">Free Chrome extension</p>
+      <h1>Check before you buy.</h1>
+      <p class="lede">Impact Tracker shows the hidden footprint of what you buy on Amazon, and points you to the cheaper, lower-impact option: buying it used.</p>
+      <!-- Replace href and remove aria-disabled once the Chrome Web Store listing is live. -->
+      <a class="cta" href="#" aria-disabled="true">Coming soon to Chrome</a>
+      <p class="fine">Free · No account · Nothing leaves your computer</p>
+    </div>
+    <div class="shot crop"><img src="img/popup.png" alt="The Impact Tracker popup showing an iPhone's estimated 39 kg CO₂e footprint and cheaper used options"></div>
+  </header>
+</div>
+
+<section class="band" id="how">
+  <div class="wrap split">
+    <div>
+      <p class="label">Right on the page</p>
+      <h2>See the used price first.</h2>
+      <p>Turn on Amazon ratings and every product page gets a small rating in the corner. When Amazon sells the item used or renewed for less, it says so, along with how much you'd save.</p>
+      <p>One click searches the right secondhand stores for that product: Back Market and Swappa for phones, Poshmark and thredUP for clothing, your library and ThriftBooks for books, and eBay or Facebook Marketplace for almost everything else.</p>
+    </div>
+    <div class="light"><img src="img/pill.png" alt="The on-page rating: $330 used, save $69, with links to secondhand stores"></div>
+  </div>
+  <div class="wrap">
+    <div class="three">
+      <div class="card">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13.25 8a5.25 5.25 0 1 1-1.54-3.71"/><path d="M12.25 1.75v3h-3"/></svg>
+        <h3>Your choices add up</h3>
+        <p>See how many products you checked used first this month, and what you could have saved.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1.75 1.75h6l6.5 6.5-6 6-6.5-6.5z"/><circle cx="5" cy="5" r="1"/></svg>
+        <h3>Honest numbers</h3>
+        <p>Every estimate has a confidence level and a cited source. We never claim you saved CO₂, because we can't see what you buy.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 12.25A7.3 7.3 0 0 1 13 3A7.3 7.3 0 0 1 3.75 12.25z"/><path d="M3.75 12.25L2 14M3.75 12.25l6-6"/></svg>
+        <h3>Private by design</h3>
+        <p>No account, no analytics, no servers. Everything is worked out and stored on your own computer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <div class="shot crop" style="max-width:380px;justify-self:center"><img src="img/clothing.png" alt="A sweater scored 61 out of 100, with an explanation of why"></div>
+    <div>
+      <p class="label">Clothing scores</p>
+      <h2>Know what you're wearing.</h2>
+      <p>Clothing with a listed fabric gets a 0–100 score from Ecobalyse, the French government's official method for the environmental cost of textiles. It counts climate, water, land, pesticides and microplastics, and tells you in plain words what drives the result.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <div>
+      <p class="label">Your online footprint</p>
+      <h2>Browsing, calls and AI, too.</h2>
+      <p>Impact Tracker also estimates the CO₂ of your browsing, streaming and video calls, and, if you turn it on, the energy, CO₂ and water behind your prompts on ChatGPT, Claude, Gemini and 15 other AI tools.</p>
+    </div>
+    <div class="shot crop" style="max-width:380px;justify-self:center;--top:.82"><img src="img/footprint.png" alt="Estimated browsing total and AI usage tiles"></div>
+  </div>
+</section>
+
+<section class="band paper">
+  <div class="wrap split">
+    <div>
+      <p class="label">Weekly recap</p>
+      <h2>Share your week.</h2>
+      <p>One click saves an image of your week to post anywhere. Nothing is uploaded.</p>
+    </div>
+    <div class="shot"><img src="img/recap.png" alt="A weekly recap card: 412 grams of carbon dioxide, lighter than last week"></div>
+  </div>
+</section>
+
+<div class="wrap">
+  <footer>
+    <div class="row"><a href="privacy.html">Privacy policy</a><a href="method.html">How we calculate</a><a href="mailto:xanderrmak@gmail.com">xanderrmak@gmail.com</a></div>
+    <p>Clothing data from <a href="https://ecobalyse.beta.gouv.fr">Ecobalyse</a>. Product estimates from the US EPA's <a href="https://zenodo.org/records/17202747">Supply Chain Greenhouse Gas Emission Factors v1.4.0</a> (CC BY 4.0). Fonts: Newsreader and IBM Plex Mono (SIL Open Font License).</p>
+  </footer>
+</div>
+</body>
+</html>
